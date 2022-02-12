@@ -1,11 +1,11 @@
 import gym
 
 from stable_baselines3 import DQN
-from gdi.policies import BoltzmannMlpPolicy
+from gdi.policies import SoftEpsilonMlpPolicy
 
 env = gym.make("CartPole-v0")
 
-model = DQN(BoltzmannMlpPolicy, env, policy_kwargs={"tau": 1.0}, verbose=1)
+model = DQN(SoftEpsilonMlpPolicy, env, verbose=1)
 model.learn(total_timesteps=500000, log_interval=4)
 model.save("dqn_cartpole")
 del model # remove to demonstrate saving and loading
